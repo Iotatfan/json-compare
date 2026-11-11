@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fa" />
+    <meta name="description" content="Compare JSON side by side. A lightweight, private tool that keeps your work in your browser." />
+    <title>JSON Compare</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  </head>
+  <body>
+    <main>
+      <section class="intro">
+        <h1>Compare JSON</h1>
+      </section>
+      <section aria-label="JSON inputs">
+        <div class="section-bar"><span class="step-label"><strong>Inputs</strong></span><button id="sample" class="text-button">Load example</button></div>
+        <div class="input-grid">
+          <article class="input-card" data-side="left">
+            <div class="card-heading"><label for="left-input"><span class="panel-letter">A</span> Original JSON</label><div class="mini-actions"><button data-format="left">Format</button><button data-clear="left">Clear</button></div></div>
+            <textarea id="left-input" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="left-error" placeholder="Paste or type JSON"></textarea>
+            <p id="left-error" class="error" role="alert" hidden></p>
+            <div class="file-bar"><span id="left-filename">Or drop a JSON file here</span><label class="upload" for="left-file">Upload file <span aria-hidden="true">↑</span></label><input id="left-file" class="file-input" type="file" accept=".json,application/json,text/plain" aria-label="Upload original JSON" /></div>
+          </article>
+          <article class="input-card" data-side="right">
+            <div class="card-heading"><label for="right-input"><span class="panel-letter">B</span> Modified JSON</label><div class="mini-actions"><button data-format="right">Format</button><button data-clear="right">Clear</button></div></div>
+            <textarea id="right-input" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="right-error" placeholder="Paste or type JSON"></textarea>
+            <p id="right-error" class="error" role="alert" hidden></p>
+            <div class="file-bar"><span id="right-filename">Or drop a JSON file here</span><label class="upload" for="right-file">Upload file <span aria-hidden="true">↑</span></label><input id="right-file" class="file-input" type="file" accept=".json,application/json,text/plain" aria-label="Upload modified JSON" /></div>
+          </article>
+        </div>
+        <div class="compare-bar"><div class="options"><label><input id="key-order" type="checkbox" /> Compare object key order</label><span>Whitespace is always ignored. Array order matters.</span></div><button id="compare" class="primary">Compare JSON <span aria-hidden="true">→</span></button></div>
+        <div class="storage-controls"><span class="status-dot"></span><span id="storage-status" role="status">Autosave enabled</span><button id="clear-saved" class="text-button">Clear saved data</button></div>
+      </section>
+      <section id="results-section" aria-label="Comparison results">
+        <div class="section-bar result-heading"><span class="step-label"><strong>Results</strong></span><span id="result-status" role="status"></span></div>
+        <div id="empty-state"><p>No comparison yet</p></div>
+        <div id="results" hidden>
+          <div class="result-toolbar"><span id="difference-count" class="count"></span><div class="navigation"><span id="selection-status" aria-live="polite"></span><button id="previous" aria-label="Previous difference">↑ Previous</button><button id="next" aria-label="Next difference">Next ↓</button></div></div>
+          <div class="result-grid"><article class="result-card"><h2><span class="panel-letter">A</span> Original <span>Formatted lines</span></h2><div id="left-result" class="code-view" tabindex="0" aria-label="Original JSON comparison"></div></article><article class="result-card"><h2><span class="panel-letter">B</span> Modified <span>Formatted lines</span></h2><div id="right-result" class="code-view" tabindex="0" aria-label="Modified JSON comparison"></div></article></div>
+          <details id="difference-details" open><summary>Differences</summary><ol id="difference-list"></ol></details>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
